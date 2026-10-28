@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" id="htmlRoot">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nadhia Ulhaq — Portfolio iOS Liquid Glass</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonts: Inter, Caveat & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            handwriting: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            appbg: {
+              DEFAULT: '#E8E9ED',
+              light: '#F2F3F6',
+              dark: '#0F1015',
+            },
+            ink: {
+              950: '#0C0D11',
+              900: '#15161C',
+              800: '#252631',
+              700: '#3C3E4C',
+              500: '#65687A',
+              400: '#8E91A5',
+              300: '#BEC1D3',
+              200: '#D5D8E4',
+              100: '#E5E7F0',
+              50: '#F5F6FA',
+            },
+            rosepink: {
+              50: '#FFF1F3',
+              100: '#FFE4E8',
+              200: '#FECDD6',
+              300: '#FDA4B4',
+              400: '#FB718B',
+              500: '#F43F64',
+              600: '#E11D47',
+              700: '#BE1238',
+            }
+          },
+          animation: {
+            'liquid-float': 'liquidFloat 14s ease-in-out infinite alternate',
+            'liquid-float-slow': 'liquidFloatSlow 18s ease-in-out infinite alternate',
+            'polaroid-float': 'polaroidFloat 5s ease-in-out infinite',
+          },
+          keyframes: {
+            liquidFloat: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '50%': { transform: 'translate(35px, -30px) scale(1.06)' },
+              '100%': { transform: 'translate(-25px, 25px) scale(0.95)' },
+            },
+            liquidFloatSlow: {
+              '0%': { transform: 'translate(0px, 0px) scale(0.96)' },
+              '50%': { transform: 'translate(-35px, 30px) scale(1.05)' },
+              '100%': { transform: 'translate(30px, -20px) scale(1)' },
+            },
+            polaroidFloat: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(-2deg)' },
+              '50%': { transform: 'translateY(-10px) rotate(-0.5deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Prevent page horizontal scroll entirely */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      transition: background-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.4s ease;
+    }
+
+    /* iOS Liquid Glass - Light Mode */
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.90);
+      box-shadow: 
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.03),
+        0 20px 42px -12px rgba(21, 22, 28, 0.08);
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .liquid-glass:hover {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(253, 164, 180, 0.85);
+      box-shadow: 
+        inset 0 2px 2px 0 rgba(255, 255, 255, 1),
+        0 24px 48px -12px rgba(244, 63, 100, 0.16);
+      transform: translateY(-2px);
+    }
+
+    /* iOS Liquid Glass - Dark Mode */
+    .dark .liquid-glass {
+      background: rgba(24, 26, 36, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.4),
+        0 20px 45px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    .dark .liquid-glass:hover {
+      background: rgba(30, 33, 46, 0.82);
+      border-color: rgba(244, 63, 100, 0.4);
+      box-shadow: 
+        inset 0 2px 2px 0 rgba(255, 255, 255, 0.22),
+        0 24px 50px -12px rgba(244, 63, 100, 0.25);
+    }
+
+    /* iOS 27 Fluid Dynamic Liquid Glass Master Bar */
+    .ios27-liquid-navbar {
+      background: rgba(255, 255, 255, 0.48);
+      backdrop-filter: blur(36px) saturate(210%) contrast(105%);
+      -webkit-backdrop-filter: blur(36px) saturate(210%) contrast(105%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 
+        0 24px 48px -12px rgba(21, 22, 28, 0.12),
+        inset 0 2px 3px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dark .ios27-liquid-navbar {
+      background: rgba(18, 20, 29, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 
+        0 24px 50px -12px rgba(0, 0, 0, 0.65),
+        inset 0 2px 2px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -2px 2px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    /* iOS 27 Liquid Segmented Nav Item */
+    .ios27-nav-item {
+      position: relative;
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      color: rgba(60, 62, 76, 0.9);
+    }
+
+    .dark .ios27-nav-item {
+      color: rgba(229, 231, 240, 0.85);
+    }
+
+    .ios27-nav-item:hover {
+      background: rgba(255, 255, 255, 0.7);
+      color: #E11D47;
+      box-shadow: 
+        0 6px 18px -4px rgba(244, 63, 100, 0.18),
+        inset 0 1px 1.5px rgba(255, 255, 255, 1);
+      transform: translateY(-1px);
+    }
+
+    .dark .ios27-nav-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FDA4B4;
+      box-shadow: 
+        0 6px 18px -4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .ios27-nav-item.active {
+      background: rgba(255, 255, 255, 0.92);
+      color: #E11D47;
+      font-weight: 600;
+      box-shadow: 
+        0 8px 22px -4px rgba(244, 63, 100, 0.22),
+        inset 0 1.5px 2px rgba(255, 255, 255, 1);
+    }
+
+    .dark .ios27-nav-item.active {
+      background: rgba(244, 63, 100, 0.28);
+      color: #FFFFFF;
+      border: 1px solid rgba(244, 63, 100, 0.4);
+      box-shadow: 
+        0 8px 24px -4px rgba(244, 63, 100, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    /* Liquid Pill elements */
+    .liquid-pill {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 20px -4px rgba(12, 13, 17, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .dark .liquid-pill {
+      background: rgba(32, 34, 46, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      color: #E5E7F0;
+    }
+
+    .liquid-dark-pill {
+      background: rgba(18, 19, 25, 0.94);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .dark .liquid-dark-pill {
+      background: rgba(244, 63, 100, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 25px -4px rgba(244, 63, 100, 0.4);
+      color: #FFFFFF;
+    }
+
+    /* 3D Shuffle Deck Stage - Adaptive Height to fit 16:9 Image + Description */
+    .card-deck-stage {
+      perspective: 1400px;
+      perspective-origin: 50% 50%;
+      position: relative;
+      width: 100%;
+      padding: 1.5rem 0.5rem 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+
+    /* KARTU BERUKURAN RASIO 16:9 MURNI SECARA KESELURUHAN */
+    .shuffle-deck-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      min-height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .shuffle-deck-wrapper {
+        min-height: 440px;
+      }
+    }
+
+    .shuffle-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 32px !important;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.6s ease;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    .shuffle-card-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 32px !important;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 26px 54px -14px rgba(18, 19, 24, 0.13),
+        0 10px 24px -6px rgba(18, 19, 24, 0.06),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+      transition: all 0.45s cubic-bezier(0.2, 0.9, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark .shuffle-card-inner {
+      background: #181A24;
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 
+        0 26px 54px -14px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .shuffle-card.is-active .shuffle-card-inner {
+      background: #FFFFFF;
+      border-color: rgba(253, 164, 180, 0.95);
+      box-shadow: 
+        0 32px 70px -14px rgba(244, 63, 100, 0.22),
+        0 12px 30px -6px rgba(18, 19, 24, 0.12),
+        0 0 0 2px rgba(253, 164, 180, 0.4),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+    }
+
+    .dark .shuffle-card.is-active .shuffle-card-inner {
+      background: #1F2230;
+      border-color: rgba(244, 63, 100, 0.7);
+      box-shadow: 
+        0 32px 70px -14px rgba(244, 63, 100, 0.28),
+        0 0 0 2px rgba(244, 63, 100, 0.35),
+        inset 0 2px 2px rgba(255, 255, 255, 0.2);
+    }
+
+    /* KARTU SAMPING & BELAKANG DENGAN EFEK BLUR ORGANIK */
+    .shuffle-card.is-side .shuffle-card-inner {
+      background: rgba(250, 250, 252, 0.82);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 
+        0 20px 40px -10px rgba(18, 19, 24, 0.10),
+        0 6px 16px -4px rgba(18, 19, 24, 0.05),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.9);
+    }
+
+    .dark .shuffle-card.is-side .shuffle-card-inner {
+      background: rgba(21, 23, 32, 0.82);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.55);
+    }
+
+    .cert-shine {
+      position: absolute;
+      inset: -50% -30%;
+      background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.7) 50%, rgba(254, 205, 214, 0.35) 55%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .dark .cert-shine {
+      background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, rgba(244, 63, 100, 0.25) 55%, transparent 65%);
+    }
+
+    .shuffle-card.is-active:hover .cert-shine {
+      transform: translateX(120%);
+    }
+
+    /* Container Gambar Diperbesar agar visual preview lebih dominan */
+    .img-16-9-box {
+      width: 100%;
+      height: 195px;
+      max-height: 60%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #E5E7F0;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 640px) {
+      .img-16-9-box {
+        height: 220px;
+        max-height: 62%;
+      }
+    }
+
+    .dark .img-16-9-box {
+      background: #12131A;
+    }
+  </style>
+</head>
+
+<body class="bg-appbg text-ink-900 dark:bg-appbg-dark dark:text-ink-100 font-sans antialiased selection:bg-rosepink-200 selection:text-ink-950 relative min-h-screen pb-28">
+
+  <!-- Canvas: Abstract Wavy Gradient Lines -->
+  <canvas id="wavyCanvas" class="fixed inset-0 w-full h-full pointer-events-none -z-20"></canvas>
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed top-10 left-1/4 w-80 sm:w-96 h-80 sm:h-96 bg-rosepink-300/30 dark:bg-rosepink-600/20 rounded-full blur-[100px] pointer-events-none -z-10 animate-liquid-float"></div>
+  <div class="fixed top-1/3 right-5 w-80 sm:w-96 h-80 sm:h-96 bg-white/70 dark:bg-ink-800/40 rounded-full blur-[110px] pointer-events-none -z-10 animate-liquid-float-slow"></div>
+  <div class="fixed bottom-20 left-5 w-80 sm:w-96 h-80 sm:h-96 bg-ink-300/30 dark:bg-rosepink-900/15 rounded-full blur-[110px] pointer-events-none -z-10 animate-liquid-float"></div>
+
+  <!-- HEADER NAVIGATION: iOS 27 LIQUID GLASS -->
+  <header class="fixed top-4 left-0 right-0 z-50 px-4 max-w-3xl mx-auto">
+    <nav class="ios27-liquid-navbar px-3.5 py-2.5 rounded-full flex items-center justify-between transition-all">
+      <a href="#slide-1" class="flex items-center group pl-1">
+        <span class="w-8 h-8 rounded-full bg-ink-950 text-white dark:bg-rosepink-600 dark:text-white font-mono font-bold text-xs flex items-center justify-center group-hover:bg-rosepink-500 group-hover:scale-105 active:scale-95 transition-all shadow-md">
+          N
+        </span>
+      </a>
+
+      <!-- iOS 27 Liquid Segmented Menu -->
+      <ul class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-white/35 dark:bg-ink-900/40 border border-white/60 dark:border-white/10 shadow-inner">
+        <li><a href="#slide-1" class="ios27-nav-item">Intro</a></li>
+        <li><a href="#slide-2" class="ios27-nav-item">About</a></li>
+        <li><a href="#slide-3" class="ios27-nav-item">Works</a></li>
+        <li><a href="#slide-4" class="ios27-nav-item">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2 pr-1">
+        <!-- THEME TOGGLE BUTTON -->
+        <button id="themeToggleBtn" aria-label="Ganti Mode Tema" class="w-8 h-8 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-ink-200 hover:text-rosepink-600 active:scale-90 transition-all shadow-sm">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-300" id="sunIcon"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-ink-800" id="moonIcon"></i>
+        </button>
+        
+        <button id="menuToggle" aria-label="Toggle Navigation Menu" class="md:hidden p-1.5 text-ink-800 dark:text-ink-200 hover:text-rosepink-600">
+          <i data-lucide="menu" class="w-4 h-4" id="menuIcon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobileNav" class="hidden md:hidden mt-2 ios27-liquid-navbar p-3 rounded-2xl shadow-xl flex flex-col gap-1 text-xs">
+      <a href="#slide-1" class="p-2.5 rounded-xl hover:bg-white/70 dark:hover:bg-white/10 text-ink-800 dark:text-ink-200 hover:text-rosepink-600 nav-item font-medium">Intro</a>
+      <a href="#slide-2" class="p-2.5 rounded-xl hover:bg-white/70 dark:hover:bg-white/10 text-ink-800 dark:text-ink-200 hover:text-rosepink-600 nav-item font-medium">About</a>
+      <a href="#slide-3" class="p-2.5 rounded-xl hover:bg-white/70 dark:hover:bg-white/10 text-ink-800 dark:text-ink-200 hover:text-rosepink-600 nav-item font-medium">Works</a>
+      <a href="#slide-4" class="p-2.5 rounded-xl liquid-dark-pill text-white font-medium text-center nav-item mt-1 hover:bg-rosepink-600">Contact</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6">
+
+    <!-- SLIDE 01: INTRO -->
+    <section id="slide-1" class="min-h-screen flex flex-col justify-center items-center py-24 sm:py-28 relative">
+      <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Kolom Kiri: Nama & Aksi -->
+        <div class="md:col-span-7 text-center md:text-left space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-pill text-xs font-mono text-ink-800 dark:text-ink-200 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-rosepink-500 animate-pulse"></span>
+            <span class="tracking-wider uppercase font-medium">Intro & Profil</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-ink-950 dark:text-white leading-[1.08]">
+            Nadhia <br class="hidden sm:inline">
+            <span class="text-rosepink-600 dark:text-rosepink-500 font-extrabold">Ulhaq</span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-ink-700 dark:text-ink-300 font-light max-w-md mx-auto md:mx-0 leading-relaxed">
+            Fresh Graduate S1 Manajemen — Universitas Stikubank · IPK 3,59
+          </p>
+
+          <!-- Tombol Aksi -->
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+            <a href="#slide-3" class="px-7 py-3.5 rounded-full liquid-dark-pill text-white text-xs sm:text-sm font-medium hover:bg-rosepink-600 active:scale-95 transition-all flex items-center gap-2 shadow-lg">
+              <span>Lihat Portofolio</span>
+              <i data-lucide="arrow-down-right" class="w-4 h-4 text-rosepink-300"></i>
+            </a>
+
+            <a href="CV Nadhia Ulhaq.pdf" download="CV Nadhia Ulhaq.pdf" class="px-7 py-3.5 rounded-full liquid-pill text-ink-950 dark:text-white text-xs sm:text-sm font-mono font-medium hover:text-rosepink-600 dark:hover:text-rosepink-400 hover:border-rosepink-300 active:scale-95 transition-all flex items-center gap-2 shadow-sm">
+              <i data-lucide="download" class="w-4 h-4 text-rosepink-500"></i>
+              <span>Download CV (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Foto Profil Template 3x4 Proporsional (Bebas Potong) -->
+        <div class="md:col-span-5 flex justify-center items-center select-none pt-4 md:pt-0">
+          <div class="relative w-60 sm:w-64 max-w-[280px] animate-polaroid-float group cursor-pointer" title="Nadhia Ulhaq">
+            
+            <!-- Layer 1: Kartu Bayangan Belakang dengan Efek Blur Reflektif -->
+            <div class="absolute inset-0 bg-white/70 dark:bg-ink-900/60 backdrop-blur-md rounded-[2rem] shadow-xl transform rotate-6 scale-95 border border-white/80 dark:border-white/10 p-2.5 pb-8 pointer-events-none transition-transform duration-500 group-hover:rotate-8 group-hover:scale-100 overflow-hidden filter blur-[0.4px]">
+              <div class="w-full aspect-[3/4] bg-rosepink-100/40 dark:bg-rosepink-950/30 rounded-2xl flex items-center justify-center border border-rosepink-200/40 dark:border-rosepink-800/30">
+                <span class="font-handwriting text-rosepink-500 dark:text-rosepink-400 text-lg tracking-wide opacity-80">3×4 portrait ~</span>
+              </div>
+            </div>
+
+            <!-- Layer 2: Kartu Frame 3:4 Utama -->
+            <div class="relative bg-white dark:bg-ink-900 rounded-[2rem] shadow-2xl p-2.5 sm:p-3 pb-8 sm:pb-9 border border-white dark:border-white/15 transform -rotate-2 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105 overflow-hidden">
+              
+              <!-- Frame Gambar 3x4: Lebar 3 bagian, Tinggi 4 bagian murni -->
+              <div class="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-ink-100 dark:bg-ink-800/90 relative shadow-inner flex items-center justify-center p-1 border border-ink-200/40 dark:border-white/5">
+                <img 
+                  id="profilePhoto" 
+                  src="Profile.jpg" 
+                  data-fallback="Profile.JPG,Profile.jpeg,profile.jpg,profile.png"
+                  alt="Nadhia Ulhaq Portrait (3x4)" 
+                  class="w-full h-full object-contain rounded-xl grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700"
+                  onerror="smartImageFallback(this, 'Profile.jpg', 'Foto Profil 3×4')"
+                />
+                
+                <!-- Fallback jika file profile.jpg belum ada di folder -->
+                <div id="profilePlaceholder" class="hidden flex flex-col items-center justify-center text-center p-4 text-ink-400 dark:text-ink-500">
+                  <div class="w-12 h-12 rounded-full bg-rosepink-100 dark:bg-rosepink-950/60 text-rosepink-500 flex items-center justify-center mb-2 shadow-sm">
+                    <i data-lucide="user" class="w-6 h-6"></i>
+                  </div>
+                  <span class="text-xs font-mono font-medium text-ink-700 dark:text-ink-300">profile.jpg</span>
+                  <span class="text-[10px] text-ink-400 mt-0.5">Format 3×4 Pasfoto</span>
+                </div>
+
+                <!-- Liquid Glass Corner Badge -->
+                <div class="absolute bottom-2 right-2 px-2.5 py-0.5 rounded-full liquid-glass text-[9px] font-mono font-bold text-ink-950 dark:text-white flex items-center gap-1 shadow-sm">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500"></span>
+                  <span>3×4</span>
+                </div>
+              </div>
+
+              <!-- Label Bawah Frame -->
+              <div class="mt-3 flex items-center justify-between px-1.5">
+                <span class="font-handwriting text-xl text-ink-900 dark:text-white tracking-wide">
+                  Nadhia Ulhaq
+                </span>
+                <span class="font-mono text-[9px] text-rosepink-600 dark:text-rosepink-400 font-bold uppercase tracking-wider">
+                  S1 Management
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 02: ABOUT & SKILLS -->
+    <section id="slide-2" class="min-h-screen flex flex-col justify-center py-20 border-t border-ink-200/50 dark:border-ink-800/60">
+      
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-pill text-xs font-mono text-ink-800 dark:text-ink-200 shadow-sm mb-2">
+          <span class="w-2 h-2 rounded-full bg-rosepink-500"></span>
+          <span class="tracking-wider uppercase font-medium">About & Skills</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-950 dark:text-white mt-1">About Me</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        
+        <!-- Story Card -->
+        <div class="md:col-span-7 space-y-4">
+          <div class="liquid-glass p-6 sm:p-7 rounded-[2rem] space-y-4 text-sm sm:text-base text-ink-800 dark:text-ink-200 leading-relaxed font-light">
+            <div class="flex items-center gap-2 pb-2 border-b border-white/60 dark:border-white/10">
+              <i data-lucide="sparkle" class="w-4 h-4 text-rosepink-500"></i>
+              <span class="text-xs font-mono uppercase tracking-wider text-ink-950 dark:text-white font-bold">Hai, Aku Nadhia</span>
+            </div>
+            <p>
+              Fresh Graduate S1 Manajemen dari Universitas Stikubank dengan IPK 3,59. Memiliki fokus pada manajemen bisnis, administrasi, pemasaran, digital marketing, serta pengolahan data. Memiliki pengalaman praktik dalam penyusunan laporan keuangan, perhitungan pajak, dan promosi digital melalui Google Ads serta Facebook Ads.
+            </p>
+            <p>
+              Saya merupakan pribadi yang disiplin, teliti, dan bertanggung jawab dalam menyelesaikan pekerjaan. Saya mampu beradaptasi dengan lingkungan baru, memiliki kemauan untuk belajar, serta dapat bekerja secara mandiri maupun dalam tim.
+            </p>
+            <p>
+              Siap belajar dan berkontribusi dalam lingkungan kerja profesional bidang manajemen bisnis, pemasaran, dan pengelolaan operasional. Berkomitmen untuk menerapkan pengetahuan akademik ke dalam praktik kerja guna memberikan kontribusi terbaik bagi perusahaan.
+            </p>
+          </div>
+
+          <!-- Software & Tools Card (Di Bawah Deskripsi) -->
+          <div class="liquid-glass p-6 rounded-[2rem] relative overflow-hidden">
+            <h3 class="text-sm font-mono tracking-wide text-rosepink-600 dark:text-rosepink-400 font-bold mb-3 flex items-center justify-between">
+              <span>Software & Tools</span>
+              <i data-lucide="laptop" class="w-4 h-4 text-rosepink-500"></i>
+            </h3>
+
+            <div class="flex flex-wrap gap-2 text-xs font-mono skills-interactive-group">
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Microsoft Office (Word, Excel, PowerPoint)</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Canva</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Google Ads</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Facebook Ads</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">CapCut</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Spreadsheet</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Google Dokumen</button>
+            </div>
+
+            <div class="mt-4 pt-3.5 border-t border-white/60 dark:border-white/10">
+              <p class="text-xs text-ink-700 dark:text-ink-300 leading-normal font-light">
+                Terampil mengoperasikan perangkat lunak produktivitas perkantoran, media kreatif, kampanye pemasaran digital, dan pengelolaan dokumen berbasis kolaborasi cloud.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Skills: Softskill & Hardskill -->
+        <div class="md:col-span-5 space-y-4">
+          
+          <!-- Softskill Card -->
+          <div class="liquid-glass p-6 rounded-[2rem] relative overflow-hidden">
+            <h3 class="text-sm font-mono tracking-wide text-rosepink-600 dark:text-rosepink-400 font-bold mb-3 flex items-center justify-between">
+              <span>Softskill</span>
+              <i data-lucide="sparkles" class="w-4 h-4 text-rosepink-500"></i>
+            </h3>
+
+            <div class="flex flex-wrap gap-2 text-xs font-mono skills-interactive-group">
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Komunikasi efektif</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Team Work</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Manajemen waktu</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Kepemimpinan</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Adaptabilitas</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Marketing</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Problem Solving</button>
+            </div>
+          </div>
+
+          <!-- Hardskill Card -->
+          <div class="liquid-glass p-6 rounded-[2rem] relative overflow-hidden">
+            <h3 class="text-sm font-mono tracking-wide text-rosepink-600 dark:text-rosepink-400 font-bold mb-3 flex items-center justify-between">
+              <span>Hardskill</span>
+              <i data-lucide="cpu" class="w-4 h-4 text-rosepink-500"></i>
+            </h3>
+
+            <div class="flex flex-wrap gap-2 text-xs font-mono skills-interactive-group">
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Digital Marketing</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Periklanan</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Konten Media Sosial</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Riset Pasar</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Analisis Data</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Manajemen Operasional</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Manajemen Keuangan</button>
+              <button type="button" class="skill-tag-btn px-3 py-1.5 rounded-xl liquid-pill text-ink-900 dark:text-ink-100 hover:text-rosepink-600 hover:border-rosepink-400 dark:hover:border-rosepink-400 hover:bg-rosepink-50/80 dark:hover:bg-rosepink-950/40 hover:shadow-md hover:shadow-rosepink-500/20 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer select-none">Social Media Marketing</button>
+            </div>
+
+            <div class="mt-4 pt-3.5 border-t border-white/60 dark:border-white/10">
+              <p class="text-xs text-ink-700 dark:text-ink-300 leading-normal font-light">
+                Didukung pemahaman manajerial terstruktur, analisis data kuantitatif, dan strategi bisnis yang adaptif.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 03: WORKS & CERTIFICATES -->
+    <section id="slide-3" class="min-h-screen flex flex-col justify-center py-20 border-t border-ink-200/50 dark:border-ink-800/60">
+      
+      <!-- WORKS SECTION: 3D CARD SHUFFLE DECK (TAMPILAN GAMBAR 16:9 DI ATAS + DESKRIPSI DI BAWAH) -->
+      <div class="mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-pill text-xs font-mono text-ink-800 dark:text-ink-200 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-rosepink-500"></span>
+                <span class="tracking-wider uppercase font-medium">Works & Certificates</span>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono liquid-pill text-ink-600 dark:text-ink-300">Format 16:9</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-950 dark:text-white mt-1">Karya Pilihan</h2>
+          </div>
+
+          <!-- Works Slider Controls -->
+          <div class="flex items-center gap-3">
+            <span id="worksShuffleCounter" class="text-xs font-mono text-ink-700 dark:text-ink-300 font-semibold tracking-wider">01 / 03</span>
+            <div class="flex items-center gap-1.5">
+              <button id="worksShufflePrevBtn" aria-label="Kocok Proyek Sebelumnya" class="w-9 h-9 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-ink-200 hover:text-rosepink-600 dark:hover:text-rosepink-400 active:scale-90 transition-all shadow-sm">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button id="worksShuffleNextBtn" aria-label="Kocok Proyek Berikutnya" class="w-9 h-9 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-ink-200 hover:text-rosepink-600 dark:hover:text-rosepink-400 active:scale-90 transition-all shadow-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Card Deck Stage for Works -->
+        <div class="card-deck-stage">
+          <div id="worksShuffleContainer" class="shuffle-deck-wrapper">
+
+            <!-- Project Card 1: hasil karya 1.png -->
+            <div class="shuffle-card works-card" data-index="0"
+                 data-title="Website & Aplikasi Manajemen Keuangan Multiplatform"
+                 data-category="Manajemen Bisnis • Financial Web & App"
+                 data-stack="Financial Management, Multiplatform (iOS & Android), PWA/APK, Data Privacy"
+                 data-desc="Pengembangan platform website dan aplikasi manajemen keuangan terpadu yang diciptakan menggunakan tools AI, dirancang untuk dapat diakses oleh siapa saja dengan mudah. Sistem ini kompatibel untuk perangkat iOS maupun Android, serta tersedia dalam bentuk aplikasi (APK) dengan fitur pelacakan anggaran, budgeting, dan pencatatan transaksi yang praktis, fleksibel, dan aman."
+                 data-link="#"
+                 data-img="hasil karya 1.png">
+              <div class="shuffle-card-inner p-3.5 sm:p-4 relative justify-between">
+                <div class="cert-shine"></div>
+
+                <!-- Bagian Atas: Gambar 16:9 hasil karya 1.png -->
+                <div class="img-16-9-box shadow-sm mb-2">
+                  <img src="hasil karya 1.png" data-fallback="hasil karya 1.png,hasil karya 1.PNG" alt="Hasil Karya 1" class="w-full h-full object-cover" onerror="smartImageFallback(this, 'hasil karya 1.png', 'Hasil Karya 01')">
+                  <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full liquid-glass text-[9px] font-mono font-semibold text-ink-900 dark:text-white flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500"></span>
+                    <span>01 &bull; Hasil Karya 1</span>
+                  </div>
+                  <div class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-ink-950/70 text-white text-[9px] font-mono">
+                    2026
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Deskripsi & Info Karya -->
+                <div class="flex-1 flex flex-col justify-between overflow-hidden">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <h3 class="text-xs sm:text-sm font-bold text-ink-950 dark:text-white tracking-tight line-clamp-1">Website & Aplikasi Manajemen Keuangan Multiplatform</h3>
+                      <span class="text-[9px] font-mono text-rosepink-600 dark:text-rosepink-400 font-semibold flex-shrink-0">Multiplatform</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-ink-700 dark:text-ink-300 font-light leading-relaxed line-clamp-2">
+                      Platform website dan aplikasi keuangan yang dapat diakses siapa saja melalui web, iOS, maupun Android (APK).
+                    </p>
+                    <div class="mt-1.5 flex flex-wrap gap-1 text-[8px] sm:text-[9px] font-mono text-ink-600 dark:text-ink-300">
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Website & APK</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">iOS & Android</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Financial System</span>
+                    </div>
+                  </div>
+
+                  <div class="pt-2 mt-1 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between">
+                    <span class="text-[10px] sm:text-[11px] font-mono text-ink-500 dark:text-ink-400 flex items-center gap-1">
+                      <i data-lucide="sparkles" class="w-3 h-3 text-rosepink-500"></i>
+                      <span>Multiplatform Ready</span>
+                    </span>
+                    <button type="button" class="preview-work-btn px-3.5 py-1 rounded-full liquid-dark-pill text-white hover:bg-rosepink-600 text-[10px] sm:text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                      <i data-lucide="maximize-2" class="w-3 h-3 text-rosepink-300"></i>
+                      <span>Detail</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Project Card 2: hasil karya 2.png -->
+            <div class="shuffle-card works-card" data-index="1"
+                 data-title="Pengelolaan Operasional & Periklanan Media Sosial"
+                 data-category="Manajemen Operasional • Digital Marketing"
+                 data-stack="Facebook Ads, Market Research, Content Planning, Excel"
+                 data-desc="Pengelolaan operasional harian, riset pasar komprehensif, perencanaan konten media sosial yang interaktif, serta eksekusi periklanan terarah untuk mencapai target pertumbuhan bisnis."
+                 data-link="#"
+                 data-img="hasil karya 2.png">
+              <div class="shuffle-card-inner p-3.5 sm:p-4 relative justify-between">
+                <div class="cert-shine"></div>
+
+                <!-- Bagian Atas: Gambar 16:9 hasil karya 2.png -->
+                <div class="img-16-9-box shadow-sm mb-2">
+                  <img src="hasil karya 2.png" data-fallback="hasil karya 2.png,hasil karya 2.PNG" alt="Hasil Karya 2" class="w-full h-full object-cover" onerror="smartImageFallback(this, 'hasil karya 2.png', 'Hasil Karya 02')">
+                  <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full liquid-glass text-[9px] font-mono font-semibold text-ink-900 dark:text-white flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500"></span>
+                    <span>02 &bull; Hasil Karya 2</span>
+                  </div>
+                  <div class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-ink-950/70 text-white text-[9px] font-mono">
+                    2026
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Deskripsi & Info Karya -->
+                <div class="flex-1 flex flex-col justify-between overflow-hidden">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <h3 class="text-xs sm:text-sm font-bold text-ink-950 dark:text-white tracking-tight line-clamp-1">Pengelolaan Operasional & Periklanan Media Sosial</h3>
+                      <span class="text-[9px] font-mono text-rosepink-600 dark:text-rosepink-400 font-semibold flex-shrink-0">Marketing</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-ink-700 dark:text-ink-300 font-light leading-relaxed line-clamp-2">
+                      Riset pasar, perencanaan konten media sosial, dan eksekusi periklanan terarah untuk pertumbuhan bisnis.
+                    </p>
+                    <div class="mt-1.5 flex flex-wrap gap-1 text-[8px] sm:text-[9px] font-mono text-ink-600 dark:text-ink-300">
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Facebook Ads</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Market Research</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Content Planning</span>
+                    </div>
+                  </div>
+
+                  <div class="pt-2 mt-1 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between">
+                    <span class="text-[10px] sm:text-[11px] font-mono text-ink-500 dark:text-ink-400 flex items-center gap-1">
+                      <i data-lucide="sparkles" class="w-3 h-3 text-rosepink-500"></i>
+                      <span>Strategi Bisnis</span>
+                    </span>
+                    <button type="button" class="preview-work-btn px-3.5 py-1 rounded-full liquid-dark-pill text-white hover:bg-rosepink-600 text-[10px] sm:text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                      <i data-lucide="maximize-2" class="w-3 h-3 text-rosepink-300"></i>
+                      <span>Detail</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Project Card 3: hasil karya 3.png -->
+            <div class="shuffle-card works-card" data-index="2"
+                 data-title="Kampanye Digital Marketing & Brand Promotion"
+                 data-category="Digital Marketing • Social Media & Ads"
+                 data-stack="Digital Marketing, Google Ads, Facebook Ads, Content Strategy"
+                 data-desc="Perancangan dan eksekusi strategi Digital Marketing menyeluruh yang berfokus pada peningkatan brand awareness, optimasi konversi, riset perilaku audiens, serta pengelolaan kampanye iklan berbayar (Google Ads & Facebook Ads) secara efektif untuk menjangkau target pasar secara luas."
+                 data-link="#"
+                 data-img="hasil karya 3.png">
+              <div class="shuffle-card-inner p-3.5 sm:p-4 relative justify-between">
+                <div class="cert-shine"></div>
+
+                <!-- Bagian Atas: Gambar 16:9 hasil karya 3.png -->
+                <div class="img-16-9-box shadow-sm mb-2">
+                  <img src="hasil karya 3.png" data-fallback="hasil karya 3.png,hasil karya 3.PNG" alt="Hasil Karya 3" class="w-full h-full object-cover" onerror="smartImageFallback(this, 'hasil karya 3.png', 'Hasil Karya 03')">
+                  <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full liquid-glass text-[9px] font-mono font-semibold text-ink-900 dark:text-white flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500"></span>
+                    <span>03 &bull; Hasil Karya 3</span>
+                  </div>
+                  <div class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-ink-950/70 text-white text-[9px] font-mono">
+                    2026
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Deskripsi & Info Karya -->
+                <div class="flex-1 flex flex-col justify-between overflow-hidden">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <h3 class="text-xs sm:text-sm font-bold text-ink-950 dark:text-white tracking-tight line-clamp-1">Kampanye Digital Marketing & Brand Promotion</h3>
+                      <span class="text-[9px] font-mono text-rosepink-600 dark:text-rosepink-400 font-semibold flex-shrink-0">Marketing</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-ink-700 dark:text-ink-300 font-light leading-relaxed line-clamp-2">
+                      Strategi pemasaran digital komprehensif, optimasi iklan berbayar, dan peningkatan jangkauan merek yang efektif.
+                    </p>
+                    <div class="mt-1.5 flex flex-wrap gap-1 text-[8px] sm:text-[9px] font-mono text-ink-600 dark:text-ink-300">
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Digital Marketing</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Google Ads</span>
+                      <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800">Facebook Ads</span>
+                    </div>
+                  </div>
+
+                  <div class="pt-2 mt-1 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between">
+                    <span class="text-[10px] sm:text-[11px] font-mono text-ink-500 dark:text-ink-400 flex items-center gap-1">
+                      <i data-lucide="sparkles" class="w-3 h-3 text-rosepink-500"></i>
+                      <span>Marketing Campaign</span>
+                    </span>
+                    <button type="button" class="preview-work-btn px-3.5 py-1 rounded-full liquid-dark-pill text-white hover:bg-rosepink-600 text-[10px] sm:text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                      <i data-lucide="maximize-2" class="w-3 h-3 text-rosepink-300"></i>
+                      <span>Detail</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Works Pagination Dots -->
+        <div id="worksShuffleDots" class="flex items-center justify-center gap-2 mt-4"></div>
+        <p class="text-[11px] font-mono text-center text-ink-500 dark:text-ink-400 mt-2">
+          * Klik kartu samping atau panah navigasi untuk mengocok karya ke depan
+        </p>
+      </div>
+
+      <!-- 5 CERTIFICATES 3D SHUFFLE DECK (TAMPILAN GAMBAR 16:9 DI ATAS + DESKRIPSI DI BAWAH) -->
+      <div class="pt-10 border-t border-ink-200/50 dark:border-ink-800/60">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-pill text-xs font-mono text-ink-800 dark:text-ink-200 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-rosepink-500"></span>
+                <span class="tracking-wider uppercase font-medium">Sertifikasi & Pelatihan</span>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono liquid-pill text-ink-600 dark:text-ink-300">Format Resmi</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-ink-950 dark:text-white tracking-tight mt-0.5">Sertifikasi & Pelatihan</h3>
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="flex items-center gap-3">
+            <span id="shuffleCounter" class="text-xs font-mono text-ink-700 dark:text-ink-300 font-semibold tracking-wider">01 / 05</span>
+            <div class="flex items-center gap-1.5">
+              <button id="shufflePrevBtn" aria-label="Kocok Kartu Sebelumnya" class="w-9 h-9 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-ink-200 hover:text-rosepink-600 dark:hover:text-rosepink-400 active:scale-90 transition-all shadow-sm">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button id="shuffleNextBtn" aria-label="Kocok Kartu Berikutnya" class="w-9 h-9 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-ink-200 hover:text-rosepink-600 dark:hover:text-rosepink-400 active:scale-90 transition-all shadow-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Card Deck Stage -->
+        <div class="card-deck-stage">
+          <div id="shuffleContainer" class="shuffle-deck-wrapper">
+
+            <!-- Card 1: BNSP Digital Marketing -->
+            <div class="shuffle-card" data-index="0">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Standar Nasional &bull; BNSP
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Sertifikat Profesi Digital Marketing</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">Badan Nasional Sertifikasi Profesi (BNSP)</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Masa Berlaku</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2026 - 2029</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Sertifikasi kompetensi resmi berstandar nasional yang mencakup penguasaan mendalam terhadap riset pasar, optimasi SEO/SEM, analisis metrik digital, penyusunan strategi content marketing, copywriting persuasif, pengelolaan multi-platform media sosial, analisis performa konten berbasis data, hingga perencanaan kampanye promosi merek secara komprehensif.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">SEO/SEM</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Content Marketing</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Copywriting</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Brand Promotion</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Terverifikasi Resmi</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">BNSP-DM-2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: British Council -->
+            <div class="shuffle-card" data-index="1">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        International &bull; British Council
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">EnglishScore - Skor 472</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">British Council</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Masa Berlaku</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2026 - 2028</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Sertifikasi kemampuan berbahasa Inggris berstandar internasional yang diakui secara global dengan skor 472, merefleksikan kompetensi komunikasi lisan dan tulisan di lingkungan kerja profesional, negosiasi bisnis internasional, serta pemahaman literatur global.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">English Proficiency</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Global Communication</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Business English</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Terverifikasi Resmi</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">ENG-472-2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Public Speaking -->
+            <div class="shuffle-card" data-index="2">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Pelatihan &bull; Dibimbing
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Public Speaking & Storytelling</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">Dibimbing</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Tahun</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2026</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Program pelatihan intensif dalam menguasai teknik komunikasi publik yang persuasif, seni penyampaian narasi (storytelling) yang memikat audiens, serta perancangan presentasi eksekutif untuk memperkuat personal branding dan pengaruh profesional.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Public Speaking</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Storytelling</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Executive Presentation</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Sertifikat Kelulusan</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">DBM-PS-2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Data Analytics -->
+            <div class="shuffle-card" data-index="3">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Pelatihan &bull; Dibimbing
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Data Analytics</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">Dibimbing</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Tahun</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2026</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Pelatihan terapan pengolahan dan analisis data bisnis untuk mengidentifikasi tren, membaca pola konsumen, melakukan interpretasi metrik kinerja, serta menyajikan insight strategis guna mendukung pengambilan keputusan berbasis data (data-driven decision making).
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Data Analytics</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Business Decision</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Market Trends</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Sertifikat Kelulusan</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">DBM-DA-2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Microsoft Excel Bootcamp -->
+            <div class="shuffle-card" data-index="4">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Bootcamp &bull; KarirNex
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Microsoft Excel Bootcamp</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">KarirNex</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Tahun</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2026</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Penguasaan tingkat lanjut perangkat lunak pengolahan spreadsheet, meliputi rumus dan fungsi kompleks, analisis data menggunakan Pivot Table, pembangunan dashboard laporan interaktif, hingga otomatisasi tugas berulang menggunakan Macro VBA untuk efisiensi operasional bisnis.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Excel Advanced</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Pivot Table</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Macro VBA</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Sertifikat Kelulusan</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">KNX-XL-2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 6: Mini Course Digital Marketing -->
+            <div class="shuffle-card" data-index="5">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Mini Course &bull; Pemasaran
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Digital Marketing</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">Mini Course</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Tahun</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2025</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Pembelajaran strategis mengenai ekosistem pemasaran digital modern, mulai dari pemetaan target audiens, perancangan kampanye iklan media sosial berbayar, pengelolaan funnel penjualan, hingga evaluasi efektivitas bauran konten digital.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Social Media</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Content Plan</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Sales Funnel</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Sertifikat Kelulusan</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">MC-DM-2025</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7: Wismilak Foundation -->
+            <div class="shuffle-card" data-index="6">
+              <div class="shuffle-card-inner p-6 sm:p-8 relative flex flex-col justify-between">
+                <div class="cert-shine"></div>
+                <div class="flex items-start justify-between gap-3 relative z-10">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl liquid-dark-pill text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                      <i data-lucide="award" class="w-6 h-6 text-rosepink-300"></i>
+                    </div>
+                    <div>
+                      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold liquid-pill text-rosepink-700 dark:text-rosepink-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rosepink-500 animate-pulse"></span>
+                        Kewirausahaan &bull; Wismilak
+                      </span>
+                      <h4 class="text-base sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight mt-1">Become a Smart Entrepreneur</h4>
+                      <p class="text-[11px] font-mono text-ink-500 dark:text-ink-400">Wismilak Foundation</p>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="text-[9px] font-mono text-ink-400 uppercase tracking-wider block">Tahun</span>
+                    <span class="text-xs font-mono font-bold text-ink-900 dark:text-ink-100">2024</span>
+                  </div>
+                </div>
+                <div class="relative z-10 py-3 space-y-3">
+                  <p class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+                    Program pengembangan jiwa kewirausahaan yang mendalam, mencakup metodologi identifikasi peluang bisnis baru, validasi ide usaha, penyusunan model bisnis yang berkelanjutan, manajemen risiko, serta eksekusi strategi pertumbuhan bisnis yang inovatif.
+                  </p>
+                  <div class="flex flex-wrap gap-2 text-[10px] font-mono text-ink-700 dark:text-ink-300">
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Entrepreneurship</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Business Strategy</span>
+                    <span class="px-3 py-1 rounded-xl bg-ink-100 dark:bg-ink-800 border">Risk Management</span>
+                  </div>
+                </div>
+                <div class="pt-3.5 border-t border-ink-100 dark:border-ink-800/80 flex items-center justify-between relative z-10 font-mono text-xs">
+                  <div class="flex items-center gap-1.5 text-ink-600 dark:text-ink-300">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                    <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">Sertifikat Kelulusan</span>
+                  </div>
+                  <div class="text-[11px] text-ink-500 dark:text-ink-400">WSM-SE-2024</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div id="shuffleDots" class="flex items-center justify-center gap-2 mt-4"></div>
+        <p class="text-[11px] font-mono text-center text-ink-500 dark:text-ink-400 mt-2">
+          * Klik kartu samping atau panah navigasi untuk mengocok sertifikat ke depan
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SLIDE 04: CONTACT & REACH OUT -->
+    <section id="slide-4" class="min-h-screen flex flex-col justify-center py-20 border-t border-ink-200/50 dark:border-ink-800/60">
+      
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-pill text-xs font-mono text-ink-800 dark:text-ink-200 shadow-sm mb-2">
+          <span class="w-2 h-2 rounded-full bg-rosepink-500"></span>
+          <span class="tracking-wider uppercase font-medium">Contact Me</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Contact Details -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="liquid-glass p-6 sm:p-7 rounded-[2rem] space-y-4">
+            <h3 class="text-base font-bold text-ink-950 dark:text-white">
+              Informasi Kontak
+            </h3>
+            
+            <p class="text-sm text-ink-800 dark:text-ink-300 leading-relaxed font-light">
+              Tertarik bekerja sama atau ingin berdiskusi mengenai pemasaran digital, manajemen bisnis, pengelolaan operasional, atau kolaborasi profesional lainnya? Kirimkan pesan Anda kapan saja.
+            </p>
+
+            <div class="pt-4 border-t border-white/60 dark:border-white/10 space-y-3 font-mono text-xs text-ink-800 dark:text-ink-300">
+              <!-- WhatsApp Langsung Tersambung -->
+              <a href="https://wa.me/62881082466308?text=Halo%20Nadhia,%20saya%20tertarik%20untuk%20berkolaborasi." target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 group hover:text-rosepink-600 dark:hover:text-rosepink-400 transition-colors">
+                <div class="w-7 h-7 rounded-full bg-emerald-500/15 dark:bg-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-ink-400 uppercase">WhatsApp</span>
+                  <span class="font-semibold">+62 881-0824-66308</span>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-emerald-500"></i>
+              </a>
+
+              <!-- Email Langsung Tersambung (Mailto) -->
+              <a href="mailto:nadhiaulhaqq@gmail.com?subject=Tawaran%20Kerjasama%20/%20Diskusi%20Proyek" class="flex items-center gap-2.5 group hover:text-rosepink-600 dark:hover:text-rosepink-400 transition-colors">
+                <div class="w-7 h-7 rounded-full bg-rosepink-500/15 dark:bg-rosepink-500/25 text-rosepink-600 dark:text-rosepink-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-ink-400 uppercase">Email</span>
+                  <span class="font-semibold">nadhiaulhaqq@gmail.com</span>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-rosepink-500"></i>
+              </a>
+
+              <!-- Lokasi Tersambung ke Google Maps -->
+              <a href="https://maps.google.com/?q=Jakarta,+Indonesia" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 group hover:text-rosepink-600 dark:hover:text-rosepink-400 transition-colors">
+                <div class="w-7 h-7 rounded-full bg-sky-500/15 dark:bg-sky-500/25 text-sky-600 dark:text-sky-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-ink-400 uppercase">Domisili</span>
+                  <span class="font-semibold">Jakarta, Indonesia</span>
+                </div>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-sky-500"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Status badge -->
+          <div class="liquid-glass p-4 rounded-2xl flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-mono text-ink-800 dark:text-ink-300">Status: Terbuka untuk peluang karir & proyek</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Contact Form -->
+        <div class="md:col-span-7">
+          <div class="liquid-glass p-6 sm:p-8 rounded-[2rem] relative">
+            
+            <form id="contactForm" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label for="senderName" class="text-xs font-mono text-ink-700 dark:text-ink-300 block">Nama Lengkap</label>
+                  <input 
+                    type="text" 
+                    id="senderName" 
+                    required 
+                    placeholder="Nama Anda"
+                    class="w-full px-4 py-2.5 rounded-xl bg-white/70 dark:bg-ink-900/60 border border-white dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-rosepink-400 font-sans text-sm text-ink-950 dark:text-white placeholder:text-ink-400 dark:placeholder:text-ink-500 transition-all"
+                  />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="senderEmail" class="text-xs font-mono text-ink-700 dark:text-ink-300 block">Email</label>
+                  <input 
+                    type="email" 
+                    id="senderEmail" 
+                    required 
+                    placeholder="nama@email.com"
+                    class="w-full px-4 py-2.5 rounded-xl bg-white/70 dark:bg-ink-900/60 border border-white dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-rosepink-400 font-sans text-sm text-ink-950 dark:text-white placeholder:text-ink-400 dark:placeholder:text-ink-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="messageSubject" class="text-xs font-mono text-ink-700 dark:text-ink-300 block">Subjek / Topik</label>
+                <input 
+                  type="text" 
+                  id="messageSubject" 
+                  required 
+                  placeholder="Diskusi Proyek atau Rekrutmen..."
+                  class="w-full px-4 py-2.5 rounded-xl bg-white/70 dark:bg-ink-900/60 border border-white dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-rosepink-400 font-sans text-sm text-ink-950 dark:text-white placeholder:text-ink-400 dark:placeholder:text-ink-500 transition-all"
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="messageBody" class="text-xs font-mono text-ink-700 dark:text-ink-300 block">Pesan Anda</label>
+                <textarea 
+                  id="messageBody" 
+                  rows="4" 
+                  required 
+                  placeholder="Tuliskan gambaran pesan, tawaran kerja, atau pertanyaan Anda di sini..."
+                  class="w-full px-4 py-2.5 rounded-xl bg-white/70 dark:bg-ink-900/60 border border-white dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-rosepink-400 font-sans text-sm text-ink-950 dark:text-white placeholder:text-ink-400 dark:placeholder:text-ink-500 transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                id="submitButton"
+                class="w-full py-3.5 rounded-xl liquid-dark-pill text-white text-xs font-mono uppercase tracking-wider font-semibold hover:bg-rosepink-600 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-md"
+              >
+                <span>Kirim Pesan Sekarang</span>
+                <i data-lucide="send" class="w-3.5 h-3.5 text-rosepink-300"></i>
+              </button>
+            </form>
+
+            <!-- Success Feedback Box -->
+            <div id="formSuccessToast" class="hidden mt-4 p-4 rounded-xl liquid-pill border-emerald-300 dark:border-emerald-700 bg-emerald-50/80 dark:bg-emerald-950/40 flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"></i>
+              <div class="text-xs">
+                <p class="font-bold text-ink-950 dark:text-white font-mono">Pesan Berhasil Terkirim!</p>
+                <p class="text-ink-700 dark:text-ink-300 mt-0.5">Terima kasih atas pesan Anda. Saya akan segera menghubungi Anda kembali melalui email.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Authentic A4 Certificate Modal Popup -->
+  <div id="certModal" class="fixed inset-0 z-50 bg-ink-950/70 dark:bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-opacity duration-300">
+    <div class="liquid-glass rounded-[2rem] max-w-2xl w-full border border-white/90 dark:border-white/20 shadow-2xl p-4 sm:p-6 relative my-auto transform scale-95 transition-transform duration-300 max-h-[94vh] flex flex-col justify-between" id="certModalBox">
+      
+      <!-- Close Button -->
+      <button onclick="closeCertModal()" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-white hover:text-rosepink-600 transition-colors shadow-sm" aria-label="Tutup Pratinjau">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Modal Header Ringkas -->
+      <div class="flex items-center justify-between pr-10 mb-3 pb-2.5 border-b border-white/60 dark:border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-rosepink-500 animate-pulse"></span>
+          <h4 id="modalCertHeaderTitle" class="text-xs sm:text-sm font-bold text-ink-950 dark:text-white font-mono tracking-tight line-clamp-1">Pratinjau Sertifikat Asli</h4>
+        </div>
+        <span class="text-[10px] font-mono text-ink-500 dark:text-ink-400 bg-white/70 dark:bg-ink-800 px-2.5 py-0.5 rounded-full border border-white dark:border-white/10 flex-shrink-0">Dokumen Asli</span>
+      </div>
+
+      <!-- Pure Image Container (Hanya Gambar Saja Tanpa Deskripsi) -->
+      <div class="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[68vh] rounded-2xl overflow-hidden bg-ink-100 dark:bg-ink-900 border border-white/80 dark:border-white/10 shadow-inner flex items-center justify-center my-auto">
+        <img 
+          id="modalCertImg" 
+          src="sertif-bnsp.jpg" 
+          alt="Pratinjau Sertifikat Asli" 
+          class="w-full h-full object-contain" 
+          onerror="handleModalImgError(this, 'sertif-bnsp.jpg')"
+        />
+        
+        <!-- Placeholder jika file gambar sertifikat belum diletakkan di folder -->
+        <div id="modalCertPlaceholder" class="hidden absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-ink-500 dark:text-ink-400 bg-ink-100/90 dark:bg-ink-900/90">
+          <div class="w-12 h-12 rounded-2xl bg-white/80 dark:bg-ink-800 text-rosepink-500 flex items-center justify-center mb-2 shadow-sm">
+            <i data-lucide="file-image" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold text-ink-950 dark:text-white">File Gambar Belum Diletakkan</span>
+          <span class="text-[10px] font-mono text-rosepink-600 dark:text-rosepink-400 mt-0.5" id="modalCertFilenameHint">sertif-bnsp.jpg</span>
+          <span class="text-[10px] text-ink-400 mt-1">Letakkan file gambar ini di folder yang sama</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center justify-between gap-3 pt-3 mt-2 border-t border-white/60 dark:border-white/10">
+        <span class="text-[10px] font-mono text-ink-500 dark:text-ink-400 truncate">
+          * Pratinjau dokumen resolusi tinggi
+        </span>
+        <div class="flex items-center gap-2 ml-auto flex-shrink-0">
+          <button onclick="closeCertModal()" class="px-4 py-1.5 rounded-xl liquid-pill text-xs font-mono text-ink-800 dark:text-white hover:text-rosepink-600 transition-colors">
+            Tutup
+          </button>
+          <a id="modalOpenExternal" href="#" target="_blank" class="px-4 py-1.5 rounded-xl liquid-dark-pill text-white hover:bg-rosepink-600 text-xs font-mono font-medium flex items-center gap-1.5 transition-colors">
+            <span>Buka Gambar Asli</span>
+            <i data-lucide="external-link" class="w-3 h-3 text-rosepink-300"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Project Detail Modal Popup -->
+  <div id="workModal" class="fixed inset-0 z-50 bg-ink-950/60 dark:bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-opacity duration-300">
+    <div class="liquid-glass rounded-[2.5rem] max-w-lg w-full border border-white/90 dark:border-white/20 shadow-2xl p-5 sm:p-7 relative my-auto transform scale-95 transition-transform duration-300 max-h-[92vh] flex flex-col justify-between" id="workModalBox">
+      
+      <!-- Close Button -->
+      <button onclick="closeWorkModal()" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full liquid-pill flex items-center justify-center text-ink-800 dark:text-white hover:text-rosepink-600 transition-colors shadow-sm">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pr-10 mb-3 pb-2 border-b border-white/60 dark:border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-rosepink-500 animate-ping"></span>
+          <span id="workModalCategory" class="text-xs font-mono uppercase tracking-wider text-rosepink-600 dark:text-rosepink-400 font-bold">Kategori Proyek</span>
+        </div>
+        <span class="text-[10px] font-mono text-ink-500 dark:text-ink-400 bg-white/70 dark:bg-ink-800 px-2.5 py-0.5 rounded-full border border-white dark:border-white/10">Detail Karya</span>
+      </div>
+
+      <!-- Preview Image 16:9 with Fallback -->
+      <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/80 dark:border-white/10 shadow-md my-2 bg-ink-100 dark:bg-ink-800 flex items-center justify-center">
+        <img id="workModalImg" src="1.jpg" alt="Pratinjau Proyek" class="w-full h-full object-cover" onerror="handleModalImgError(this, '1.jpg')">
+        <div id="workModalImgPlaceholder" class="hidden absolute inset-0 flex flex-col items-center justify-center text-ink-400 bg-ink-100 dark:bg-ink-800">
+          <i data-lucide="image" class="w-8 h-8 mb-1 text-rosepink-500"></i>
+          <span class="text-xs font-mono">File Belum Tersedia di Folder</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="space-y-3 py-2">
+        <h3 id="workModalTitle" class="text-lg sm:text-xl font-bold text-ink-950 dark:text-white tracking-tight">
+          Judul Proyek
+        </h3>
+        <p id="workModalDesc" class="text-xs sm:text-sm text-ink-700 dark:text-ink-300 font-light leading-relaxed">
+          Deskripsi lengkap proyek...
+        </p>
+
+        <div class="pt-2 border-t border-white/60 dark:border-white/10">
+          <span class="text-[10px] font-mono text-ink-500 dark:text-ink-400 uppercase block mb-1">Teknologi yang Digunakan</span>
+          <p id="workModalStack" class="text-xs font-mono font-semibold text-rosepink-600 dark:text-rosepink-400">
+            Stack
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex items-center justify-end gap-2 pt-3 mt-2 border-t border-white/60 dark:border-white/10">
+        <button onclick="closeWorkModal()" class="px-4 py-2 rounded-xl liquid-pill text-xs font-mono text-ink-800 dark:text-white hover:text-rosepink-600 transition-colors">
+          Tutup
+        </button>
+        <a id="workModalLiveBtn" href="https://github.com" target="_blank" class="px-4 py-2 rounded-xl liquid-dark-pill text-white hover:bg-rosepink-600 text-xs font-mono font-medium flex items-center gap-1.5 transition-colors">
+          <span>Kunjungi Proyek</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5 text-rosepink-300"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Minimalist Clean Footer -->
+  <footer class="max-w-4xl mx-auto px-4 sm:px-6 py-8 border-t border-ink-200/50 dark:border-ink-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-ink-500 dark:text-ink-400">
+    <p>&copy; 2026 Nadhia Ulhaq. Designed with iOS 27 Liquid Glass.</p>
+    <a href="#slide-1" class="hover:text-rosepink-600 dark:hover:text-rosepink-400 transition-colors flex items-center gap-1">
+      <span>Kembali ke Atas</span>
+      <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+    </a>
+  </footer>
+
+  <script>
+    // --- SMART IMAGE FALLBACK & MULTI-EXTENSION DETECTOR ---
+    // Menyelesaikan masalah ekstensi (.JPG, .png, .jpeg) & auto-refresh cache
+    function smartImageFallback(imgEl, originalFilename, label) {
+      if (!imgEl) return;
+      
+      const fallbacksAttr = imgEl.getAttribute('data-fallback');
+      let fallbackList = fallbacksAttr ? fallbacksAttr.split(',') : [];
+      let currentTryIndex = parseInt(imgEl.getAttribute('data-try-index') || '0', 10);
+
+      // Coba ekstensi alternatif jika tersedia (misal file Anda ternyata .png atau .PNG)
+      if (currentTryIndex < fallbackList.length) {
+        const nextSrc = fallbackList[currentTryIndex].trim();
+        imgEl.setAttribute('data-try-index', (currentTryIndex + 1).toString());
+        // Tambahkan cache query untuk memastikan tidak tertahan cache browser
+        imgEl.src = nextSrc;
+        return;
+      }
+
+      // Jika seluruh ekstensi lokal memang belum diletakkan di folder:
+      imgEl.onerror = null;
+      imgEl.style.display = 'none';
+
+      // Khusus foto profil
+      if (imgEl.id === 'profilePhoto') {
+        const ph = document.getElementById('profilePlaceholder');
+        if (ph) ph.classList.remove('hidden');
+        return;
+      }
+
+      const parent = imgEl.parentElement;
+      if (parent && !parent.querySelector('.smart-placeholder-box')) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'smart-placeholder-box w-full h-full flex flex-col items-center justify-center p-4 text-center bg-ink-100/90 dark:bg-ink-800/90 select-none';
+        placeholder.innerHTML = `
+          <div class="w-10 h-10 rounded-2xl bg-white/90 dark:bg-ink-700 text-rosepink-500 flex items-center justify-center mb-1.5 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <span class="text-xs font-mono font-bold text-ink-900 dark:text-white">${label || 'File Gambar'}</span>
+          <span class="text-[10px] font-mono text-rosepink-600 dark:text-rosepink-400 mt-0.5">${originalFilename}</span>
+          <span class="text-[9px] text-ink-400 mt-1">Letakkan di folder yang sama</span>
+        `;
+        parent.appendChild(placeholder);
+      }
+    }
+
+    function handleModalImgError(imgEl, filename) {
+      if (!imgEl) return;
+      
+      const fallbacks = [filename.replace('.jpg', '.png'), filename.replace('.jpg', '.jpeg'), filename.replace('.jpg', '.JPG')];
+      let currentTry = parseInt(imgEl.getAttribute('data-modal-try') || '0', 10);
+      
+      if (currentTry < fallbacks.length) {
+        imgEl.setAttribute('data-modal-try', (currentTry + 1).toString());
+        imgEl.src = fallbacks[currentTry];
+        return;
+      }
+
+      imgEl.onerror = null;
+      imgEl.style.display = 'none';
+      const placeholder = imgEl.nextElementSibling;
+      if (placeholder) {
+        placeholder.classList.remove('hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Icons
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      // Pastikan gambar di-reload saat halaman pertama kali dibuka untuk menghindari cache lama
+      const allLocalImgs = document.querySelectorAll('img[src]');
+      allLocalImgs.forEach(img => {
+        // Cek jika gambar berhasil load, reset display ke normal
+        img.addEventListener('load', () => {
+          img.style.display = 'block';
+          if (img.id === 'profilePhoto') {
+            const ph = document.getElementById('profilePlaceholder');
+            if (ph) ph.classList.add('hidden');
+          }
+          const parent = img.parentElement;
+          if (parent) {
+            const ph = parent.querySelector('.smart-placeholder-box');
+            if (ph) ph.remove();
+          }
+        });
+      });
+
+      // --- THEME TOGGLE (MODE TERANG & MALAM) ENGINE ---
+      const htmlRoot = document.getElementById('htmlRoot');
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+      const savedTheme = localStorage.getItem('theme-mode');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlRoot.classList.add('dark');
+      } else {
+        htmlRoot.classList.remove('dark');
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          htmlRoot.classList.toggle('dark');
+          const isDark = htmlRoot.classList.contains('dark');
+          localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
+          if (window.lucide) window.lucide.createIcons();
+        });
+      }
+
+      // --- Abstract Wavy Gradient Lines Engine ---
+      const canvas = document.getElementById('wavyCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let time = 0;
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let targetMouseX = 0.5;
+        let targetMouseY = 0.5;
+
+        const resizeCanvas = () => {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.scale(dpr, dpr);
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', (e) => {
+          targetMouseX = e.clientX / window.innerWidth;
+          targetMouseY = e.clientY / window.innerHeight;
+        });
+
+        const strands = [
+          {
+            baseY: 0.32,
+            amplitude: 48,
+            frequency: 0.0022,
+            speed: 0.012,
+            thickness: 1.8,
+            colorStops: [
+              { stop: 0.0, color: 'rgba(255, 255, 255, 0.15)' },
+              { stop: 0.35, color: 'rgba(244, 63, 100, 0.45)' },
+              { stop: 0.7, color: 'rgba(253, 164, 180, 0.55)' },
+              { stop: 1.0, color: 'rgba(255, 255, 255, 0.2)' }
+            ]
+          },
+          {
+            baseY: 0.48,
+            amplitude: 62,
+            frequency: 0.0018,
+            speed: 0.009,
+            thickness: 2.2,
+            colorStops: [
+              { stop: 0.0, color: 'rgba(255, 255, 255, 0.2)' },
+              { stop: 0.4, color: 'rgba(244, 63, 100, 0.5)' },
+              { stop: 0.65, color: 'rgba(225, 29, 71, 0.35)' },
+              { stop: 1.0, color: 'rgba(100, 105, 125, 0.2)' }
+            ]
+          },
+          {
+            baseY: 0.64,
+            amplitude: 54,
+            frequency: 0.0025,
+            speed: 0.014,
+            thickness: 1.6,
+            colorStops: [
+              { stop: 0.0, color: 'rgba(100, 105, 125, 0.12)' },
+              { stop: 0.3, color: 'rgba(253, 164, 180, 0.4)' },
+              { stop: 0.75, color: 'rgba(244, 63, 100, 0.4)' },
+              { stop: 1.0, color: 'rgba(255, 255, 255, 0.25)' }
+            ]
+          },
+          {
+            baseY: 0.78,
+            amplitude: 40,
+            frequency: 0.0028,
+            speed: 0.011,
+            thickness: 1.4,
+            colorStops: [
+              { stop: 0.0, color: 'rgba(255, 255, 255, 0.1)' },
+              { stop: 0.5, color: 'rgba(251, 113, 139, 0.35)' },
+              { stop: 1.0, color: 'rgba(60, 62, 76, 0.15)' }
+            ]
+          }
+        ];
+
+        const renderWaves = () => {
+          time += 0.85;
+          mouseX += (targetMouseX - mouseX) * 0.04;
+          mouseY += (targetMouseY - mouseY) * 0.04;
+
+          ctx.clearRect(0, 0, width, height);
+
+          strands.forEach((strand, sIdx) => {
+            const linesInRibbon = 7;
+            const spacing = 4.2;
+
+            for (let l = 0; l < linesInRibbon; l++) {
+              ctx.beginPath();
+              const gradient = ctx.createLinearGradient(0, 0, width, height * 0.8);
+              strand.colorStops.forEach(cs => {
+                gradient.addColorStop(cs.stop, cs.color);
+              });
+
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = strand.thickness * (1 - (l / linesInRibbon) * 0.4);
+              ctx.lineCap = 'round';
+
+              const phaseOffset = (sIdx * 1.5) + (l * 0.22);
+              const mouseDisplacement = (mouseY - 0.5) * 45;
+              const step = 20;
+
+              for (let x = 0; x <= width + step; x += step) {
+                const wave1 = Math.sin(x * strand.frequency + time * strand.speed + phaseOffset) * strand.amplitude;
+                const wave2 = Math.cos(x * (strand.frequency * 1.6) - time * (strand.speed * 0.6) + phaseOffset * 0.7) * (strand.amplitude * 0.4);
+                const mouseWave = Math.sin((x / width - mouseX) * Math.PI) * mouseDisplacement;
+                const y = (height * strand.baseY) + (l * spacing) + wave1 + wave2 + mouseWave;
+
+                if (x === 0) {
+                  ctx.moveTo(x, y);
+                } else {
+                  ctx.lineTo(x, y);
+                }
+              }
+              ctx.stroke();
+            }
+          });
+
+          requestAnimationFrame(renderWaves);
+        };
+
+        renderWaves();
+      }
+
+      // Mobile Nav Toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const menuIcon = document.getElementById('menuIcon');
+      const navItems = document.querySelectorAll('.nav-item');
+
+      if (menuToggle && mobileNav) {
+        menuToggle.addEventListener('click', () => {
+          mobileNav.classList.toggle('hidden');
+          const isOpened = !mobileNav.classList.contains('hidden');
+          if (menuIcon) {
+            menuIcon.setAttribute('data-lucide', isOpened ? 'x' : 'menu');
+            if (window.lucide) window.lucide.createIcons();
+          }
+        });
+
+        navItems.forEach(item => {
+          item.addEventListener('click', () => {
+            mobileNav.classList.add('hidden');
+            if (menuIcon) {
+              menuIcon.setAttribute('data-lucide', 'menu');
+              if (window.lucide) window.lucide.createIcons();
+            }
+          });
+        });
+      }
+
+      // Highlight active nav item on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.ios27-nav-item');
+
+      const highlightNavOnScroll = () => {
+        const scrollY = window.pageYOffset;
+        sections.forEach(section => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 140;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      };
+
+      window.addEventListener('scroll', highlightNavOnScroll, { passive: true });
+      highlightNavOnScroll();
+
+      // --- INTERAKTIF SOFTSKILL & HARDSKILL: OTOMATIS PINK SAAT DIKLIK ---
+      const skillButtons = document.querySelectorAll('.skill-tag-btn');
+      skillButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('is-pink-active');
+
+          if (btn.classList.contains('is-pink-active')) {
+            // Aktifkan gaya Pink Rose khas Liquid Glass
+            btn.classList.add(
+              '!bg-rosepink-500', 
+              '!text-white', 
+              '!border-rosepink-400', 
+              'shadow-md', 
+              'shadow-rosepink-500/30', 
+              'scale-105'
+            );
+            btn.classList.remove('text-ink-900', 'dark:text-ink-100');
+          } else {
+            // Kembalikan ke warna netral liquid pill
+            btn.classList.remove(
+              '!bg-rosepink-500', 
+              '!text-white', 
+              '!border-rosepink-400', 
+              'shadow-md', 
+              'shadow-rosepink-500/30', 
+              'scale-105', 
+              'is-pink-active'
+            );
+            btn.classList.add('text-ink-900', 'dark:text-ink-100');
+          }
+        });
+      });
+
+      // Download CV Handler
+      const downloadCvBtn = document.getElementById('downloadCvBtn');
+      const downloadCvText = document.getElementById('downloadCvText');
+      const downloadCvIcon = document.getElementById('downloadCvIcon');
+
+      if (downloadCvBtn && downloadCvText) {
+        downloadCvBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const originalText = downloadCvText.innerText;
+          downloadCvText.innerText = 'Mengunduh...';
+          downloadCvBtn.classList.add('text-rosepink-600', 'border-rosepink-400');
+          if (downloadCvIcon) {
+            downloadCvIcon.setAttribute('data-lucide', 'loader-2');
+            downloadCvIcon.classList.add('animate-spin');
+            if (window.lucide) window.lucide.createIcons();
+          }
+
+          setTimeout(() => {
+            const cvContent = `CURRICULUM VITAE - NADHIA ULHAQ
+Fresh Graduate S1 Manajemen - Universitas Stikubank Semarang (IPK 3,59)
+Email: nadhiaulhaqq@gmail.com | Lokasi: Semarang / Jakarta, Indonesia
+
+PROFIL:
+Fresh Graduate S1 Manajemen dari Universitas Stikubank dengan IPK 3,59.
+Memiliki fokus pada manajemen bisnis, administrasi, pemasaran, digital marketing, serta pengolahan data.
+Memiliki pengalaman praktik dalam penyusunan laporan keuangan, perhitungan pajak, dan promosi digital melalui Google Ads serta Facebook Ads.
+Pribadi yang disiplin, teliti, dan bertanggung jawab. Mampu beradaptasi dengan lingkungan baru dan dapat bekerja secara mandiri maupun dalam tim.
+
+SOFTSKILL:
+- Marketing & Komunikasi
+- Kepemimpinan & Teamwork
+- Manajemen Waktu & Adaptabilitas
+- Problem Solving & Negosiasi
+
+HARDSKILL:
+- Analisis Data & Microsoft Excel / Spreadsheet
+- Manajemen Operasional & Perencanaan Bisnis
+- Riset Pasar & Manajemen Keuangan
+- Presentasi Bisnis
+- Digital Marketing (Google Ads, Facebook Ads)
+- Penyusunan Laporan Keuangan & Perhitungan Pajak
+`;
+            const blob = new Blob([cvContent], { type: 'text/plain;charset=utf-8' });
+            const downloadUrl = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.download = 'CV-Nadhia_Ulhaq.txt';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(downloadUrl);
+
+            downloadCvText.innerText = 'Tersimpan!';
+            if (downloadCvIcon) {
+              downloadCvIcon.setAttribute('data-lucide', 'check');
+              downloadCvIcon.classList.remove('animate-spin');
+              if (window.lucide) window.lucide.createIcons();
+            }
+
+            setTimeout(() => {
+              downloadCvText.innerText = originalText;
+              downloadCvBtn.classList.remove('text-rosepink-600', 'border-rosepink-400');
+              if (downloadCvIcon) {
+                downloadCvIcon.setAttribute('data-lucide', 'download');
+                if (window.lucide) window.lucide.createIcons();
+              }
+            }, 2500);
+          }, 800);
+        });
+      }
+
+      // Contact Form Handler
+      const contactForm = document.getElementById('contactForm');
+      const submitButton = document.getElementById('submitButton');
+      const formSuccessToast = document.getElementById('formSuccessToast');
+
+      if (contactForm && formSuccessToast) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const senderName = document.getElementById('senderName').value;
+          const senderEmail = document.getElementById('senderEmail').value;
+          const messageSubject = document.getElementById('messageSubject').value;
+          const messageBody = document.getElementById('messageBody').value;
+
+          const originalText = submitButton.innerHTML;
+          submitButton.innerHTML = '<span>Membuka Email...</span>';
+          submitButton.disabled = true;
+
+          // Buat mailto link otomatis dari isi form agar terkirim langsung ke email Anda
+          const mailtoUrl = `mailto:nadhiaulhaqq@gmail.com?subject=${encodeURIComponent(messageSubject)}&body=${encodeURIComponent("Nama: " + senderName + "\nEmail: " + senderEmail + "\n\nPesan:\n" + messageBody)}`;
+          window.location.href = mailtoUrl;
+
+          setTimeout(() => {
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+            formSuccessToast.classList.remove('hidden');
+            contactForm.reset();
+
+            setTimeout(() => {
+              formSuccessToast.classList.add('hidden');
+            }, 6000);
+          }, 600);
+        });
+      }
+
+      // 3D Card Shuffle Deck Engine
+      function setupShuffleDeck({
+        containerEl,
+        cards,
+        prevBtn,
+        nextBtn,
+        dotsContainer,
+        counterEl,
+        onPreview
+      }) {
+        if (!containerEl || !cards.length) return;
+
+        const totalCards = cards.length;
+        let currentIndex = 0;
+
+        const renderDots = () => {
+          if (!dotsContainer) return;
+          dotsContainer.innerHTML = '';
+          for (let i = 0; i < totalCards; i++) {
+            const dot = document.createElement('button');
+            dot.className = `h-1.5 rounded-full transition-all duration-300 ${
+              i === currentIndex ? 'w-7 bg-rosepink-500 shadow-sm' : 'w-2 bg-ink-300 dark:bg-ink-700 hover:bg-ink-400'
+            }`;
+            dot.setAttribute('aria-label', `Pilih kartu ${i + 1}`);
+            dot.addEventListener('click', () => {
+              if (currentIndex !== i) {
+                currentIndex = i;
+                updatePositions();
+              }
+            });
+            dotsContainer.appendChild(dot);
+          }
+        };
+
+        const updatePositions = () => {
+          const isMobile = window.innerWidth < 640;
+
+          cards.forEach((card, idx) => {
+            let diff = (idx - currentIndex + totalCards) % totalCards;
+            if (diff > totalCards / 2) {
+              diff -= totalCards;
+            }
+
+            card.classList.remove('is-active', 'is-side');
+
+            if (diff === 0) {
+              card.classList.add('is-active');
+              card.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateY(0deg) rotateZ(0deg) scale(1)`;
+              card.style.zIndex = '35';
+              card.style.opacity = '1';
+              card.style.filter = 'none';
+              card.style.cursor = 'default';
+              card.style.pointerEvents = 'auto';
+            } 
+            else if (diff === 1) {
+              card.classList.add('is-side');
+              const xTranslate = isMobile ? '70px' : '130px';
+              card.style.transform = `translateX(${xTranslate}) translateY(8px) translateZ(-60px) rotateY(-5deg) rotateZ(1.5deg) scale(0.93)`;
+              card.style.zIndex = '24';
+              card.style.opacity = '0.9';
+              card.style.filter = 'blur(1.5px) brightness(0.97)';
+              card.style.cursor = 'pointer';
+              card.style.pointerEvents = 'auto';
+            } 
+            else if (diff === -1) {
+              card.classList.add('is-side');
+              const xTranslate = isMobile ? '-70px' : '-130px';
+              card.style.transform = `translateX(${xTranslate}) translateY(8px) translateZ(-60px) rotateY(5deg) rotateZ(-1.5deg) scale(0.93)`;
+              card.style.zIndex = '24';
+              card.style.opacity = '0.9';
+              card.style.filter = 'blur(1.5px) brightness(0.97)';
+              card.style.cursor = 'pointer';
+              card.style.pointerEvents = 'auto';
+            } 
+            else if (diff === 2) {
+              card.classList.add('is-side');
+              const xTranslate = isMobile ? '120px' : '200px';
+              card.style.transform = `translateX(${xTranslate}) translateY(14px) translateZ(-120px) rotateY(-8deg) rotateZ(2.5deg) scale(0.85)`;
+              card.style.zIndex = '14';
+              card.style.opacity = '0.75';
+              card.style.filter = 'blur(3.5px) brightness(0.92)';
+              card.style.cursor = 'pointer';
+              card.style.pointerEvents = 'auto';
+            }
+            else if (diff === -2) {
+              card.classList.add('is-side');
+              const xTranslate = isMobile ? '-120px' : '-200px';
+              card.style.transform = `translateX(${xTranslate}) translateY(14px) translateZ(-120px) rotateY(8deg) rotateZ(-2.5deg) scale(0.85)`;
+              card.style.zIndex = '14';
+              card.style.opacity = '0.75';
+              card.style.filter = 'blur(3.5px) brightness(0.92)';
+              card.style.cursor = 'pointer';
+              card.style.pointerEvents = 'auto';
+            }
+            else {
+              card.style.transform = `translateX(0px) translateY(20px) translateZ(-180px) rotateZ(0deg) scale(0.75)`;
+              card.style.zIndex = '5';
+              card.style.opacity = '0';
+              card.style.filter = 'blur(6px)';
+              card.style.cursor = 'default';
+              card.style.pointerEvents = 'none';
+            }
+          });
+
+          if (counterEl) {
+            counterEl.textContent = `0${currentIndex + 1} / 0${totalCards}`;
+          }
+
+          renderDots();
+        };
+
+        cards.forEach((card, idx) => {
+          card.addEventListener('click', (e) => {
+            const previewTrigger = e.target.closest('.preview-work-btn') || e.target.closest('.preview-cert-btn');
+            if (previewTrigger && onPreview) {
+              e.stopPropagation();
+              onPreview(card);
+              return;
+            }
+
+            if (idx !== currentIndex) {
+              currentIndex = idx;
+              updatePositions();
+            } else if (onPreview) {
+              onPreview(card);
+            }
+          });
+        });
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            updatePositions();
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalCards;
+            updatePositions();
+          });
+        }
+
+        let touchStartX = 0;
+        let isSwiping = false;
+
+        containerEl.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+          isSwiping = true;
+        }, { passive: true });
+
+        containerEl.addEventListener('touchend', (e) => {
+          if (!isSwiping) return;
+          isSwiping = false;
+          const diff = touchStartX - e.changedTouches[0].clientX;
+          if (diff > 35) {
+            currentIndex = (currentIndex + 1) % totalCards;
+            updatePositions();
+          } else if (diff < -35) {
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            updatePositions();
+          }
+        }, { passive: true });
+
+        window.addEventListener('resize', updatePositions);
+        updatePositions();
+      }
+
+      // Initialize Works Deck
+      const worksCards = Array.from(document.querySelectorAll('.works-card'));
+      setupShuffleDeck({
+        containerEl: document.getElementById('worksShuffleContainer'),
+        cards: worksCards,
+        prevBtn: document.getElementById('worksShufflePrevBtn'),
+        nextBtn: document.getElementById('worksShuffleNextBtn'),
+        dotsContainer: document.getElementById('worksShuffleDots'),
+        counterEl: document.getElementById('worksShuffleCounter'),
+        onPreview: (card) => {
+          const title = card.getAttribute('data-title');
+          const category = card.getAttribute('data-category');
+          const stack = card.getAttribute('data-stack');
+          const desc = card.getAttribute('data-desc');
+          const img = card.getAttribute('data-img');
+          const link = card.getAttribute('data-link');
+          window.openWorkModal(title, category, stack, desc, img, link);
+        }
+      });
+
+      // Initialize Certificates Deck (Murni teks tanpa modal gambar)
+      const certCards = Array.from(document.querySelectorAll('.shuffle-card:not(.works-card)'));
+      setupShuffleDeck({
+        containerEl: document.getElementById('shuffleContainer'),
+        cards: certCards,
+        prevBtn: document.getElementById('shufflePrevBtn'),
+        nextBtn: document.getElementById('shuffleNextBtn'),
+        dotsContainer: document.getElementById('shuffleDots'),
+        counterEl: document.getElementById('shuffleCounter'),
+        onPreview: null
+      });
+
+      // Work Modal Handlers
+      window.openWorkModal = function(title, category, stack, desc, img, link) {
+        const modal = document.getElementById('workModal');
+        const box = document.getElementById('workModalBox');
+        if (!modal || !box) return;
+
+        document.getElementById('workModalTitle').textContent = title;
+        document.getElementById('workModalCategory').textContent = category;
+        document.getElementById('workModalStack').textContent = stack;
+        document.getElementById('workModalDesc').textContent = desc;
+
+        const imgEl = document.getElementById('workModalImg');
+        const placeholder = document.getElementById('workModalImgPlaceholder');
+        const linkBtn = document.getElementById('workModalLiveBtn');
+        
+        if (imgEl && img) {
+          imgEl.style.display = 'block';
+          if (placeholder) placeholder.classList.add('hidden');
+          imgEl.src = img;
+        }
+        if (linkBtn && link) linkBtn.href = link;
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          box.classList.remove('scale-95');
+          box.classList.add('scale-100');
+        }, 10);
+        if (window.lucide) window.lucide.createIcons();
+      };
+
+      window.closeWorkModal = function() {
+        const modal = document.getElementById('workModal');
+        const box = document.getElementById('workModalBox');
+        if (!modal || !box) return;
+
+        box.classList.remove('scale-100');
+        box.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 180);
+      };
+
+      const workModalEl = document.getElementById('workModal');
+      if (workModalEl) {
+        workModalEl.addEventListener('click', (e) => {
+          if (e.target === workModalEl) {
+            window.closeWorkModal();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
